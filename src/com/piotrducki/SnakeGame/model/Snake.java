@@ -32,6 +32,7 @@ public class Snake
 		else
 			direction = newDirection;
 	}
+	
 
 	public void move()
 	{
@@ -72,7 +73,10 @@ public class Snake
 			return true;
 		return false;
 	}
-
+	public int getScore()
+	{
+		return getSize()-INITAL_SNAKE_SIZE;
+	}
 	public void updateSankeSize(int additonalPoints)
 	{
 		snakeSize += additonalPoints;
