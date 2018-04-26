@@ -11,11 +11,13 @@ import java.awt.*;
 public class SnakeGame implements Runnable
 {
 	
+	private static final int SPACE_FOR_TOP_BAR = 20;
 	private static final int BOARD_SIZE = 50;
 	private View gameView;
 	private Controller gameController;
 	private Snake snake;
 	private Apple apple;
+	
 
 	public static void main(String[] args)
 	{
@@ -35,7 +37,7 @@ public class SnakeGame implements Runnable
 		Container contentPane = jframe.getContentPane();
         contentPane.add(gameView.getCanvas(), BorderLayout.CENTER);
 
-		jframe.setSize(BOARD_SIZE * gameView.getSizeOfPoint() ,BOARD_SIZE * gameView.getSizeOfPoint() );
+		jframe.setSize(BOARD_SIZE * gameView.getSizeOfPoint() ,BOARD_SIZE * gameView.getSizeOfPoint()  + SPACE_FOR_TOP_BAR);
 		jframe.setResizable(false);
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.setVisible(true);

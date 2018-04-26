@@ -1,6 +1,7 @@
 package com.piotrducki.SnakeGame.model;
 
 import java.util.Random;
+import java.awt.Point;
 import java.util.LinkedList;
 
 public class Apple
@@ -50,8 +51,8 @@ public class Apple
 	private void generateNewCoordinatesForApple()
 	{
 		Random generator = new Random();
-		appleCoordinates.setX(generator.nextInt(boardSize) + 1);
-		appleCoordinates.setY(generator.nextInt(boardSize) + 1);
+		appleCoordinates.x =(generator.nextInt(boardSize) );
+		appleCoordinates.y =(generator.nextInt(boardSize) );
 	}
 	
 

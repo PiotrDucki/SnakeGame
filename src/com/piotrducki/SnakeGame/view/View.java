@@ -3,9 +3,8 @@ package com.piotrducki.SnakeGame.view;
 import javax.swing.*;
 
 import com.piotrducki.SnakeGame.model.Apple;
-import com.piotrducki.SnakeGame.model.Point;
 import com.piotrducki.SnakeGame.model.Snake;
-
+import java.awt.Point;
 import java.awt.*;
 import java.util.LinkedList;
 
@@ -62,7 +61,7 @@ public class View
 	public void drawApple(Graphics g)
 	{
 		g.setColor(Color.RED);
-		g.fillRect(apple.getApple().getX()* SIZE_OF_POINT, apple.getApple().getY()* SIZE_OF_POINT,  SIZE_OF_POINT,  SIZE_OF_POINT);
+		g.fillRect((int)(apple.getApple().getX())* SIZE_OF_POINT, (int)(apple.getApple().getY())* SIZE_OF_POINT,  SIZE_OF_POINT,  SIZE_OF_POINT);
 	}
 
 	public void drawSnake(Graphics g)
@@ -70,7 +69,7 @@ public class View
 		g.setColor(Color.BLACK);
 		for (Point snakePart : snake.getSnakeParts())
 		{
-			g.fillRect(snakePart.getX()* SIZE_OF_POINT, snakePart.getY()* SIZE_OF_POINT,  SIZE_OF_POINT,  SIZE_OF_POINT);
+			g.fillRect((int )snakePart.getX()* SIZE_OF_POINT, (int) (snakePart.getY()* SIZE_OF_POINT),  SIZE_OF_POINT,  SIZE_OF_POINT);
 		}
 
 	}
