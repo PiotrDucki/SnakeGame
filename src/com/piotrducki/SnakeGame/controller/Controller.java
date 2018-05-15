@@ -13,10 +13,10 @@ import com.piotrducki.SnakeGame.view.GameView;
 
 public class Controller implements Runnable, KeyListener
 {
-	private static final int FRAMES_PER_SECOND = 40;
+	private static final int FRAMES_PER_SECOND = 20;
 	private static final int SKIP_TICKS = 1000 / FRAMES_PER_SECOND;
 	private static final int POINTS_PER_APPLE = 1;
-	private static boolean gameIsRunning = true;
+	private static boolean gameIsRunning;
 	private boolean dirWasChanged = false;
 
 
@@ -41,7 +41,10 @@ public class Controller implements Runnable, KeyListener
 
 		long nextGameTick = System.currentTimeMillis();
 		long sleepTime = 0;
-
+		
+		snake.restart();
+		gameIsRunning = true;
+		
 		while (gameIsRunning)
 		{
 			updateGame();
@@ -57,7 +60,6 @@ public class Controller implements Runnable, KeyListener
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
 		}
 		System.out.println("The End");
 

@@ -24,7 +24,7 @@ public class GameView
 		this.boardSize = boardSize;
 		this.spaceForScoreBar = spaceForScoreBar;
 		
-		lableScore = new JLabel("                                                          yoyo");
+		lableScore = new JLabel();
 
 		canvas = new JPanel()
 		{
@@ -37,9 +37,8 @@ public class GameView
 				drawApple(graphics);
 			}
 		};
-		
-
-		
+	
+	
 	}
 
 	public void draw(LinkedList<Point> snakeParts, Point apple, int score)

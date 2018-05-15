@@ -24,7 +24,20 @@ public class Snake
 		}
 		snakeSize = snakeParts.size();
 	}
-
+	
+	public void restart()
+	{
+		snakeParts.removeAll(getSnakeParts());
+		snakeSize = INITAL_SNAKE_SIZE;
+		direction = Direction.UP;
+		for (int i = 0; i < INITAL_SNAKE_SIZE; i++)
+		{
+			Point newSnakePart = new Point(boardSize / 2, boardSize / 2 + i);
+			snakeParts.add(newSnakePart);
+		}
+		snakeSize = snakeParts.size();
+	}
+	
 	public void changeDirection(int newDirection)
 	{
 		if (direction - newDirection == 2 || direction - newDirection == -2) // snake can't make 180 degrees turns
