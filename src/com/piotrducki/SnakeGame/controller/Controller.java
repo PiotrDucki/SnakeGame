@@ -1,24 +1,25 @@
 package com.piotrducki.SnakeGame.controller;
 
 import java.awt.Window;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javax.swing.ViewportLayout;
+import javax.swing.*;
+
 
 import com.piotrducki.SnakeGame.model.Apple;
 import com.piotrducki.SnakeGame.model.Direction;
 import com.piotrducki.SnakeGame.model.Snake;
 import com.piotrducki.SnakeGame.view.GameView;
 
-public class Controller implements Runnable, KeyListener
+public class Controller implements Runnable
 {
 	private static final int FRAMES_PER_SECOND = 20;
 	private static final int SKIP_TICKS = 1000 / FRAMES_PER_SECOND;
 	private static final int POINTS_PER_APPLE = 1;
 	private static boolean gameIsRunning;
-	private boolean dirWasChanged = false;
-
+	private int direction;
 
 	private int boardSize;
 	private Snake snake;
@@ -38,11 +39,14 @@ public class Controller implements Runnable, KeyListener
 	@Override
 	public void run()
 	{
-
+		
+		addKeyBindings();
 		long nextGameTick = System.currentTimeMillis();
 		long sleepTime = 0;
 		
 		snake.restart();
+		apple.restart();
+		direction = Direction.UP;
 		gameIsRunning = true;
 		
 		while (gameIsRunning)
@@ -72,6 +76,7 @@ public class Controller implements Runnable, KeyListener
 
 	private void updateGame()
 	{
+		snake.changeDirection(direction);
 		snake.move();
 		if (snake.checkSelfCollision() || snake.checkWallCollison())
 			gameIsRunning = false;
@@ -80,9 +85,58 @@ public class Controller implements Runnable, KeyListener
 			snake.updateSankeSize(POINTS_PER_APPLE);
 			apple.generateNewAppleCoordinates(snake.getSnakeParts());
 		}
-		dirWasChanged = false;
-	}
 
+	}
+	
+	private void addKeyBindings()
+	{
+		InputMap im = view.getLableScore().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0,  false), "go up");
+		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0,false), "go down");
+		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0,false), "go left");
+		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0,false), "go right");
+		
+		ActionMap am = view.getLableScore().getActionMap();
+		
+		am.put("go up", new AbstractAction()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				direction = Direction.UP;
+			}
+		});
+		
+		am.put("go down", new AbstractAction()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				direction = Direction.DOWN;
+			}
+		});
+ 
+		am.put("go left", new AbstractAction()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				direction = Direction.LEFT;
+			}
+		});
+
+		am.put("go right", new AbstractAction()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				direction = Direction.RIGHT;
+			}
+		});
+	}
+	
+	
+/*
 	@Override
 	public void keyPressed(KeyEvent e)
 	{
@@ -115,16 +169,8 @@ public class Controller implements Runnable, KeyListener
 		case KeyEvent.VK_SPACE:
 			break;
 		}
+		
 	}
 
-	@Override
-	public void keyTyped(KeyEvent e)
-	{
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e)
-	{
-	}
-
+	*/
 }

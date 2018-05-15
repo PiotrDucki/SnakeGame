@@ -31,6 +31,11 @@ public class Apple
 		return appleCoordinates;
 	}
 	
+	public void  restart()
+	{
+		appleCoordinates = new Point(boardSize/2, boardSize/4);
+	}
+	
 
 	@Override
 	public String toString()

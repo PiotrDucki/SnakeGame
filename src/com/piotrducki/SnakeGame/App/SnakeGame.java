@@ -68,7 +68,6 @@ public class SnakeGame implements Runnable
 		contentPane.add(gameView.getCanvas(), BorderLayout.CENTER);
 
 	
-		jframe.addKeyListener(gameController);
 		
 		setVisibleMenu();
 

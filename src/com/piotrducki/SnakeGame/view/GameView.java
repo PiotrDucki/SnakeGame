@@ -3,8 +3,11 @@ package com.piotrducki.SnakeGame.view;
 import javax.swing.*;
 
 import com.piotrducki.SnakeGame.model.Apple;
+import com.piotrducki.SnakeGame.model.Direction;
 import com.piotrducki.SnakeGame.model.Snake;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.*;
 import java.util.LinkedList;
 
@@ -12,6 +15,7 @@ public class GameView
 {
 	private JLabel lableScore;
 	private JPanel canvas;
+	
 	
 	private final int SIZE_OF_POINT = 10;
 	private int spaceForScoreBar;
