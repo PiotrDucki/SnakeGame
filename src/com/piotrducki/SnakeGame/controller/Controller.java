@@ -33,22 +33,22 @@ public class Controller implements Runnable
 		snake = s;
 		apple = a;
 		view = v;
-
+		
+		addKeyBindings();
 	}
 
 	@Override
 	public void run()
 	{
-		
-		addKeyBindings();
 		long nextGameTick = System.currentTimeMillis();
 		long sleepTime = 0;
 		
 		snake.restart();
 		apple.restart();
+		
 		direction = Direction.UP;
 		gameIsRunning = true;
-		
+				
 		while (gameIsRunning)
 		{
 			updateGame();
@@ -135,42 +135,5 @@ public class Controller implements Runnable
 		});
 	}
 	
-	
-/*
-	@Override
-	public void keyPressed(KeyEvent e)
-	{
-		if(dirWasChanged == true)
-			return;
-		
-		int keyCode = e.getKeyCode();
-		switch (keyCode)
-		{
-		case KeyEvent.VK_UP:
-			snake.changeDirection(Direction.UP);
-			dirWasChanged = true;
-			break;
-		case KeyEvent.VK_RIGHT:
-			snake.changeDirection(Direction.RIGHT);
-			dirWasChanged = true;
-			break;
-		case KeyEvent.VK_DOWN:
-			snake.changeDirection(Direction.DOWN);
-			dirWasChanged = true;
-			break;
-		case KeyEvent.VK_LEFT:
-			snake.changeDirection(Direction.LEFT);
-			dirWasChanged = true;
-			break;
-		case KeyEvent.VK_Q:
-			gameIsRunning = false;
-			dirWasChanged = true;
-			break;
-		case KeyEvent.VK_SPACE:
-			break;
-		}
-		
-	}
 
-	*/
 }

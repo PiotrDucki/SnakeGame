@@ -2,6 +2,7 @@ package com.piotrducki.SnakeGame.App;
 
 import com.piotrducki.SnakeGame.controller.Controller;
 import com.piotrducki.SnakeGame.model.Apple;
+import com.piotrducki.SnakeGame.model.Highscores;
 import com.piotrducki.SnakeGame.model.Snake;
 import com.piotrducki.SnakeGame.view.GameView;
 import com.piotrducki.SnakeGame.view.MenuView;
@@ -50,6 +51,13 @@ public class SnakeGame implements Runnable
 	@Override
 	public void run()
 	{
+		
+		Highscores highscores = new Highscores();
+	  highscores.addNewHighscore(2, "piotr");
+	highscores.addNewHighscore(1551, "54");
+		System.out.println(highscores);
+		
+		
 		boolean programIsRuning = true;
 
 		initObjects();
@@ -68,7 +76,6 @@ public class SnakeGame implements Runnable
 		contentPane.add(gameView.getCanvas(), BorderLayout.CENTER);
 
 	
-		
 		setVisibleMenu();
 
 		jframe.setVisible(true);
@@ -100,7 +107,7 @@ public class SnakeGame implements Runnable
 			{
 				try
 				{
-					TimeUnit.MILLISECONDS.sleep(600);
+					TimeUnit.MILLISECONDS.sleep(1000);
 				} catch (InterruptedException e)
 				{
 					e.printStackTrace();
