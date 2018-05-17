@@ -33,6 +33,7 @@ public class SnakeGame implements Runnable
 	private Controller gameController;
 	private Snake snake;
 	private Apple apple;
+	private Highscores highscores;
 
 	private enum State
 	{
@@ -51,12 +52,7 @@ public class SnakeGame implements Runnable
 	@Override
 	public void run()
 	{
-		
-		Highscores highscores = new Highscores();
-	  highscores.addNewHighscore(2, "piotr");
-	highscores.addNewHighscore(1551, "54");
-		System.out.println(highscores);
-		
+
 		
 		boolean programIsRuning = true;
 
@@ -75,7 +71,6 @@ public class SnakeGame implements Runnable
 		contentPane.add(gameView.getLableScore(), BorderLayout.NORTH);
 		contentPane.add(gameView.getCanvas(), BorderLayout.CENTER);
 
-	
 		setVisibleMenu();
 
 		jframe.setVisible(true);
@@ -134,9 +129,11 @@ public class SnakeGame implements Runnable
 	{
 		snake = new Snake(BOARD_SIZE);
 		apple = new Apple(BOARD_SIZE);
+		highscores = new Highscores();
 		gameView = new GameView(BOARD_SIZE, SPACE_FOR_SCORE_BAR);
-		gameController = new Controller(BOARD_SIZE, snake, apple, gameView);
+		gameController = new Controller(BOARD_SIZE, snake, apple, gameView,highscores );
 		menuView = new MenuView();
+		
 	}
 
 	private void setVisibleMenu()

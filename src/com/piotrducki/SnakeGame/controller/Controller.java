@@ -10,6 +10,7 @@ import javax.swing.*;
 
 import com.piotrducki.SnakeGame.model.Apple;
 import com.piotrducki.SnakeGame.model.Direction;
+import com.piotrducki.SnakeGame.model.Highscores;
 import com.piotrducki.SnakeGame.model.Snake;
 import com.piotrducki.SnakeGame.view.GameView;
 
@@ -25,14 +26,16 @@ public class Controller implements Runnable
 	private Snake snake;
 	private Apple apple;
 	private GameView view;
+	private Highscores highscores;
 
 
-	public Controller(int bSize, Snake s, Apple a, GameView v)
+	public Controller(int bSize, Snake s, Apple a, GameView v, Highscores h)
 	{
 		boardSize = bSize;
 		snake = s;
 		apple = a;
 		view = v;
+		highscores = h;
 		
 		addKeyBindings();
 	}
@@ -65,6 +68,15 @@ public class Controller implements Runnable
 					e.printStackTrace();
 				}
 		}
+		int score = snake.getScore();
+		if(highscores.checkIfNewHighscore(score))
+		{
+			String  user = JOptionPane.showInputDialog(view.getCanvas(), "You have new highscore! Enter you nick", "Congratulations!", JOptionPane.INFORMATION_MESSAGE);
+			if(user == null)
+				user = "UNKNOWN";
+			highscores.addNewHighscore(score, user);
+		}
+		
 		System.out.println("The End");
 
 	}

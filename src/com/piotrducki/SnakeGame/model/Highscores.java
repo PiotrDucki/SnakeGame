@@ -45,7 +45,6 @@ public class Highscores
 			highscoresUsers.addLast(userName);
 		} else if (newScore > highscoresValues.getFirst())
 		{
-			System.out.println("yeah");
 			highscoresValues.add(1, newScore);
 			highscoresUsers.add(1, userName);
 		} else
@@ -53,7 +52,6 @@ public class Highscores
 			highscoresValues.addFirst(newScore);
 			highscoresUsers.addFirst(userName);
 		}
-		
 
 		saveHighcoresToFile();
 	}
@@ -65,7 +63,7 @@ public class Highscores
 
 	private void saveHighcoresToFile()
 	{
-		File scoreFile = new File("highscore.txt");
+		File scoreFile = new File("highscore.dat");
 		if (!scoreFile.exists())
 		{
 			try
@@ -112,7 +110,7 @@ public class Highscores
 
 		try
 		{
-			fileReader = new FileReader("highscore.txt");
+			fileReader = new FileReader("highscore.dat");
 			bufferedReader = new BufferedReader(fileReader);
 			for (int i = 0; i < NUBER_OF_HIGHSCORES; i++)
 			{
@@ -148,7 +146,7 @@ public class Highscores
 
 	private String generateHighscoreString(int index)
 	{
-		String stringToWrite = highscoresUsers.get(index) +" "+ highscoresValues.get(index).toString() + "\n";
+		String stringToWrite = highscoresUsers.get(index) + " " + highscoresValues.get(index).toString() + "\n";
 		return stringToWrite;
 	}
 
