@@ -163,6 +163,8 @@ public class Highscores
 	@Override
 	public String toString()
 	{
-		return "Highscores [highscoresValues=" + highscoresValues + ", highscoresUsers=" + highscoresUsers + "]";
+		return highscoresValues.get(2).toString() +"  "+  highscoresUsers.get(2).toString() + "\n"
+				+ highscoresValues.get(1).toString() + "  "+ highscoresUsers.get(1).toString() + "\n"
+				+ highscoresValues.get(0).toString() + "  "+ highscoresUsers.get(0).toString();
 	}
 }

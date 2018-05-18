@@ -90,7 +90,8 @@ public class SnakeGame implements Runnable
 					gameThread.start();
 					break;
 				case HIGHSCORE_IS_CLICKED:
-					state = State.HIGHSCORE;
+					//state = State.HIGHSCORE;
+					JOptionPane.showMessageDialog(menuView.getCanvas(), highscores, "Highscores", JOptionPane.PLAIN_MESSAGE); 
 					break;
 				case EXIT_IS_CLICKED:
 					programIsRuning = false;

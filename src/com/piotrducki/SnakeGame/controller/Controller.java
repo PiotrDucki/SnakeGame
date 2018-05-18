@@ -71,14 +71,12 @@ public class Controller implements Runnable
 		int score = snake.getScore();
 		if(highscores.checkIfNewHighscore(score))
 		{
-			String  user = JOptionPane.showInputDialog(view.getCanvas(), "You have new highscore! Enter you nick", "Congratulations!", JOptionPane.INFORMATION_MESSAGE);
+			String  user = JOptionPane.showInputDialog(view.getCanvas(), "You have new highscore! Enter you nick:", "Congratulations!", JOptionPane.INFORMATION_MESSAGE);
 			if(user == null)
 				user = "UNKNOWN";
 			highscores.addNewHighscore(score, user);
 		}
 		
-		System.out.println("The End");
-
 	}
 
 	private void displayGame()
