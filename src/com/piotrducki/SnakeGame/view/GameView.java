@@ -11,23 +11,35 @@ import java.awt.event.KeyEvent;
 import java.awt.*;
 import java.util.LinkedList;
 
+/**
+ * class responsible for displaying the game on the screen
+ * 
+ * @author piotrducki
+ *
+ */
 public class GameView
 {
 	private JLabel lableScore;
 	private JPanel canvas;
-	
-	
+
 	private final int SIZE_OF_POINT = 10;
 	private int spaceForScoreBar;
 	private int boardSize;
 	private LinkedList<Point> snakeParts;
 	private Point apple;
 
+	/**
+	 * 
+	 * @param boardSize
+	 *            size of game board
+	 * @param spaceForScoreBar
+	 *            space for score bar at the top of the screen
+	 */
 	public GameView(int boardSize, int spaceForScoreBar)
 	{
 		this.boardSize = boardSize;
 		this.spaceForScoreBar = spaceForScoreBar;
-		
+
 		lableScore = new JLabel();
 
 		canvas = new JPanel()
@@ -41,9 +53,19 @@ public class GameView
 				drawApple(graphics);
 			}
 		};
-	
-	
+
 	}
+
+	/**
+	 * draws snake on screan
+	 * 
+	 * @param snakeParts
+	 *            snake parts
+	 * @param apple
+	 *            apple
+	 * @param score
+	 *            score
+	 */
 
 	public void draw(LinkedList<Point> snakeParts, Point apple, int score)
 	{
@@ -53,6 +75,10 @@ public class GameView
 		canvas.repaint();
 	}
 
+	/**
+	 * 
+	 * @return size of rectangle representing one point
+	 */
 	public int getSizeOfPoint()
 	{
 		return SIZE_OF_POINT;
@@ -62,11 +88,17 @@ public class GameView
 	{
 		return canvas;
 	}
-	
+
 	public JLabel getLableScore()
 	{
 		return lableScore;
 	}
+
+	/**
+	 * draws empty board
+	 * 
+	 * @param g
+	 */
 
 	private void drawBoard(Graphics g)
 	{
@@ -77,6 +109,11 @@ public class GameView
 
 	}
 
+	/**
+	 * draws apple
+	 * 
+	 * @param g
+	 */
 	private void drawApple(Graphics g)
 	{
 		g.setColor(Color.RED);
@@ -84,6 +121,11 @@ public class GameView
 				SIZE_OF_POINT);
 	}
 
+	/**
+	 * draws apple
+	 * 
+	 * @param g
+	 */
 	private void drawSnake(Graphics g)
 	{
 		g.setColor(Color.BLACK);

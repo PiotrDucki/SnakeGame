@@ -11,6 +11,13 @@ public class Snake
 	private int boardSize;
 	LinkedList<Point> snakeParts;
 
+	/**
+	 * initializes snake with default size
+	 * 
+	 * @param bSize
+	 *            board size
+	 */
+
 	public Snake(int bSize)
 	{
 		snakeParts = new LinkedList<Point>();
@@ -24,7 +31,10 @@ public class Snake
 		}
 		snakeSize = snakeParts.size();
 	}
-	
+
+	/**
+	 * resetting snake to default values and size
+	 */
 	public void restart()
 	{
 		snakeParts.removeAll(getSnakeParts());
@@ -37,16 +47,25 @@ public class Snake
 		}
 		snakeSize = snakeParts.size();
 	}
-	
+
+	/**
+	 * changes the direction of a snake (snake can't make 180 degrees turns)
+	 * 
+	 * @param newDirection
+	 *            new direction
+	 */
 	public void changeDirection(int newDirection)
 	{
-		if (direction - newDirection == 2 || direction - newDirection == -2) // snake can't make 180 degrees turns
+		if (direction - newDirection == 2 || direction - newDirection == -2)
 			;
 		else
 			direction = newDirection;
 	}
-	
 
+	/**
+	 * moves snake by one point in current direction, if snake have eaten apple
+	 * method doesn't pop last element of snake body
+	 */
 	public void move()
 	{
 		if (snakeHaveEatenApple())
@@ -59,6 +78,12 @@ public class Snake
 		}
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return returns true if head of snake is in the same place as other element
+	 *         of snake body
+	 */
 	public Boolean checkSelfCollision()
 	{
 		Point head = snakeParts.getFirst();
@@ -70,14 +95,26 @@ public class Snake
 		return false;
 	}
 
+	/**
+	 * 
+	 * @return returns true if head of snake is out of bounds of the game board
+	 */
+
 	public Boolean checkWallCollison()
 	{
 		Point head = snakeParts.getFirst();
-		if (head.getX() == -1 || head.getX() == boardSize || head.getY() == -1|| head.getY() == boardSize )
+		if (head.getX() == -1 || head.getX() == boardSize || head.getY() == -1 || head.getY() == boardSize)
 			return true;
 		else
 			return false;
 	}
+
+	/**
+	 * 
+	 * @param apple
+	 *            current apple position
+	 * @return true if head of snake is in the same place as apple
+	 */
 
 	public Boolean checkAppleCollision(Point apple)
 	{
@@ -86,24 +123,51 @@ public class Snake
 			return true;
 		return false;
 	}
+
+	/**
+	 * 
+	 * @return score
+	 */
+
 	public int getScore()
 	{
-		return getSize()-INITAL_SNAKE_SIZE;
+		return getSize() - INITAL_SNAKE_SIZE;
 	}
+
+	/**
+	 * 
+	 * @param additonalPoints
+	 *            point that need to be added to score
+	 */
+
 	public void updateSankeSize(int additonalPoints)
 	{
 		snakeSize += additonalPoints;
 	}
+
+	/**
+	 * 
+	 * @return sanke parts as linked list of points
+	 */
 
 	public LinkedList<Point> getSnakeParts()
 	{
 		return snakeParts;
 	}
 
+	/**
+	 * 
+	 * @return size of sanke
+	 */
 	public int getSize()
 	{
 		return snakeSize;
 	}
+
+	/**
+	 * 
+	 * @return true if snake have eaten apple
+	 */
 
 	private Boolean snakeHaveEatenApple()
 	{
@@ -112,6 +176,11 @@ public class Snake
 		else
 			return false;
 	}
+
+	/**
+	 * adds new element do snakes body parts in direction which the snake is point
+	 * at
+	 */
 
 	private void addNewSnakeHead()
 	{

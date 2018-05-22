@@ -1,6 +1,7 @@
 package com.piotrducki.SnakeGame.App;
 
 import com.piotrducki.SnakeGame.controller.Controller;
+
 import com.piotrducki.SnakeGame.model.Apple;
 import com.piotrducki.SnakeGame.model.Highscores;
 import com.piotrducki.SnakeGame.model.Snake;
@@ -13,6 +14,13 @@ import java.awt.event.ComponentListener;
 import java.awt.event.WindowEvent;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * class responsible for creating all objects and opening game menu
+ * 
+ * @author piotrducki
+ *
+ */
+
 public class SnakeGame implements Runnable
 {
 
@@ -20,8 +28,6 @@ public class SnakeGame implements Runnable
 	private static final int START_IS_CLICKED = 1;
 	private static final int HIGHSCORE_IS_CLICKED = 2;
 	private static final int EXIT_IS_CLICKED = 3;
-
-	private int menuInput = NOTHING_IS_CLICKED;
 
 	private static final int SPACE_FOR_TOP_BAR = 20;
 	private static final int SPACE_FOR_SCORE_BAR = 20;
@@ -37,7 +43,7 @@ public class SnakeGame implements Runnable
 
 	private enum State
 	{
-		MENU, GAME, HIGHSCORE
+		MENU, GAME
 	}
 
 	private static State state;
@@ -49,11 +55,15 @@ public class SnakeGame implements Runnable
 		snakeGame.run();
 	}
 
+	/**
+	 * Inits all objects needed for program to run, handles user input in menu is
+	 * responsible for creating new game threads
+	 */
+
 	@Override
 	public void run()
 	{
 
-		
 		boolean programIsRuning = true;
 
 		initObjects();
@@ -90,8 +100,8 @@ public class SnakeGame implements Runnable
 					gameThread.start();
 					break;
 				case HIGHSCORE_IS_CLICKED:
-					//state = State.HIGHSCORE;
-					JOptionPane.showMessageDialog(menuView.getCanvas(), highscores, "Highscores", JOptionPane.PLAIN_MESSAGE); 
+					JOptionPane.showMessageDialog(menuView.getCanvas(), highscores, "Highscores",
+							JOptionPane.PLAIN_MESSAGE);
 					break;
 				case EXIT_IS_CLICKED:
 					programIsRuning = false;
@@ -126,16 +136,25 @@ public class SnakeGame implements Runnable
 		jframe.dispatchEvent(new WindowEvent(jframe, WindowEvent.WINDOW_CLOSING));
 	}
 
+	/**
+	 * Inits all objects needed for program to run
+	 */
+
 	private void initObjects()
 	{
 		snake = new Snake(BOARD_SIZE);
 		apple = new Apple(BOARD_SIZE);
 		highscores = new Highscores();
 		gameView = new GameView(BOARD_SIZE, SPACE_FOR_SCORE_BAR);
-		gameController = new Controller(BOARD_SIZE, snake, apple, gameView,highscores );
+		gameController = new Controller(BOARD_SIZE, snake, apple, gameView, highscores);
 		menuView = new MenuView();
-		
+
 	}
+
+	/**
+	 * set visibility on all game components to false and all menu components to
+	 * true
+	 */
 
 	private void setVisibleMenu()
 	{
@@ -143,6 +162,11 @@ public class SnakeGame implements Runnable
 		gameView.getLableScore().setVisible(false);
 		menuView.getCanvas().setVisible(true);
 	}
+
+	/**
+	 * set visibility on all menu components to false and all menu components to
+	 * false
+	 */
 
 	private void setVisibleGame()
 	{

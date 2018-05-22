@@ -8,6 +8,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
 
+/**
+ * class responsible for dealing with highscores highcores are saved as
+ * linkedLists one with the name of the player and second with the score
+ * 
+ * @author piotrducki
+ *
+ */
 public class Highscores
 {
 
@@ -18,12 +25,23 @@ public class Highscores
 	private LinkedList<Integer> highscoresValues = new LinkedList<Integer>();
 	private LinkedList<String> highscoresUsers = new LinkedList<String>();
 
+	/**
+	 * read highscores from file, if file can't be found create new file and
+	 * initialize all highscores with "." 0
+	 */
 	public Highscores()
 	{
 		if (!loadHighcoresfromFile())
 			initHighscores();
 
 	}
+
+	/**
+	 * 
+	 * @param newScore
+	 *            new score
+	 * @return true if score is higher then the lowest highscore
+	 */
 
 	public boolean checkIfNewHighscore(int newScore)
 	{
@@ -32,6 +50,16 @@ public class Highscores
 		else
 			return false;
 	}
+
+	/**
+	 * checks where to put new score in highscore list and delete the previous
+	 * lowest highscore
+	 * 
+	 * @param newScore
+	 *            new score
+	 * @param userName
+	 *            user name
+	 */
 
 	public void addNewHighscore(int newScore, String userName)
 	{
@@ -56,10 +84,9 @@ public class Highscores
 		saveHighcoresToFile();
 	}
 
-	// data in file is saved like this
-	// amadeusz 12
-	// arek 22
-	// antek 29
+	/**
+	 * save data to file "highscore.dat"
+	 */
 
 	private void saveHighcoresToFile()
 	{
@@ -103,6 +130,12 @@ public class Highscores
 		}
 	}
 
+	/**
+	 * load data form "highscore.dat"
+	 * 
+	 * @return true if data loaded properly
+	 */
+
 	private boolean loadHighcoresfromFile()
 	{
 		FileReader fileReader = null;
@@ -136,6 +169,13 @@ public class Highscores
 		return true;
 	}
 
+	/**
+	 * add highscore to highscore list
+	 * 
+	 * @param highscoreString
+	 *            string containing "user" highscoreValue
+	 */
+
 	private void addHighscore(String highscoreString)
 	{
 		String[] arr = highscoreString.split(" ");
@@ -144,6 +184,11 @@ public class Highscores
 		highscoresValues.addLast(Integer.parseInt(arr[1]));
 	}
 
+	/**
+	 * return string that are use to save data to file
+	 * @param index index at highscore list
+	 * @return string to be saved to file
+	 */
 	private String generateHighscoreString(int index)
 	{
 		String stringToWrite = highscoresUsers.get(index) + " " + highscoresValues.get(index).toString() + "\n";
@@ -163,8 +208,8 @@ public class Highscores
 	@Override
 	public String toString()
 	{
-		return highscoresValues.get(2).toString() +"  "+  highscoresUsers.get(2).toString() + "\n"
-				+ highscoresValues.get(1).toString() + "  "+ highscoresUsers.get(1).toString() + "\n"
-				+ highscoresValues.get(0).toString() + "  "+ highscoresUsers.get(0).toString();
+		return highscoresValues.get(2).toString() + "  " + highscoresUsers.get(2).toString() + "\n"
+				+ highscoresValues.get(1).toString() + "  " + highscoresUsers.get(1).toString() + "\n"
+				+ highscoresValues.get(0).toString() + "  " + highscoresUsers.get(0).toString();
 	}
 }

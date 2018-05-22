@@ -7,12 +7,18 @@ import java.awt.event.KeyListener;
 
 import javax.swing.*;
 
-
 import com.piotrducki.SnakeGame.model.Apple;
 import com.piotrducki.SnakeGame.model.Direction;
 import com.piotrducki.SnakeGame.model.Highscores;
 import com.piotrducki.SnakeGame.model.Snake;
 import com.piotrducki.SnakeGame.view.GameView;
+
+/**
+ * Class is responsible for handling user input and making changing model data
+ * 
+ * @author piotrducki
+ *
+ */
 
 public class Controller implements Runnable
 {
@@ -28,6 +34,20 @@ public class Controller implements Runnable
 	private GameView view;
 	private Highscores highscores;
 
+	/**
+	 * Setting all controller objects and adding key bindings
+	 * 
+	 * @param bSize
+	 *            size of game board
+	 * @param s
+	 *            snake object
+	 * @param a
+	 *            apple object
+	 * @param v
+	 *            game view object
+	 * @param h
+	 *            highscore object
+	 */
 
 	public Controller(int bSize, Snake s, Apple a, GameView v, Highscores h)
 	{
@@ -36,22 +56,27 @@ public class Controller implements Runnable
 		apple = a;
 		view = v;
 		highscores = h;
-		
+
 		addKeyBindings();
 	}
+
+	/**
+	 * Loop responsible for updating and displaying the game. After the game is
+	 * finished, checks if new the score is high enough to be new high score
+	 */
 
 	@Override
 	public void run()
 	{
 		long nextGameTick = System.currentTimeMillis();
 		long sleepTime = 0;
-		
+
 		snake.restart();
 		apple.restart();
-		
+
 		direction = Direction.UP;
 		gameIsRunning = true;
-				
+
 		while (gameIsRunning)
 		{
 			updateGame();
@@ -69,20 +94,30 @@ public class Controller implements Runnable
 				}
 		}
 		int score = snake.getScore();
-		if(highscores.checkIfNewHighscore(score))
+		if (highscores.checkIfNewHighscore(score))
 		{
-			String  user = JOptionPane.showInputDialog(view.getCanvas(), "You have new highscore! Enter you nick:", "Congratulations!", JOptionPane.INFORMATION_MESSAGE);
-			if(user == null)
+			String user = JOptionPane.showInputDialog(view.getCanvas(), "You have new highscore! Enter you nick:",
+					"Congratulations!", JOptionPane.INFORMATION_MESSAGE);
+			if (user == null)
 				user = "UNKNOWN";
 			highscores.addNewHighscore(score, user);
 		}
-		
+
 	}
+
+	/**
+	 * displays all game objects
+	 */
 
 	private void displayGame()
 	{
-		view.draw(snake.getSnakeParts(), apple.getApple(),snake.getScore());
+		view.draw(snake.getSnakeParts(), apple.getApple(), snake.getScore());
 	}
+
+	/**
+	 * Updates snake direction, moves snake by one point, check if any collisions
+	 * appeared and if so ends the game
+	 */
 
 	private void updateGame()
 	{
@@ -97,17 +132,21 @@ public class Controller implements Runnable
 		}
 
 	}
-	
+
+	/**
+	 * Adds key binding responsible for changing snake direction
+	 */
+
 	private void addKeyBindings()
 	{
 		InputMap im = view.getLableScore().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0,  false), "go up");
-		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0,false), "go down");
-		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0,false), "go left");
-		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0,false), "go right");
-		
+		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, false), "go up");
+		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, false), "go down");
+		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0, false), "go left");
+		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0, false), "go right");
+
 		ActionMap am = view.getLableScore().getActionMap();
-		
+
 		am.put("go up", new AbstractAction()
 		{
 			@Override
@@ -116,7 +155,7 @@ public class Controller implements Runnable
 				direction = Direction.UP;
 			}
 		});
-		
+
 		am.put("go down", new AbstractAction()
 		{
 			@Override
@@ -125,7 +164,7 @@ public class Controller implements Runnable
 				direction = Direction.DOWN;
 			}
 		});
- 
+
 		am.put("go left", new AbstractAction()
 		{
 			@Override
@@ -144,6 +183,5 @@ public class Controller implements Runnable
 			}
 		});
 	}
-	
 
 }
